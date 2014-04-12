@@ -1,6 +1,7 @@
 # -*- coding:utf8 -*-
 from flask import Flask
 from grs import Stock
+from urllib2 import URLError
 
 
 app = Flask(__name__)
@@ -15,8 +16,11 @@ def index():
 def stock_page(no):
     no = str(no)
     if no:
-        stock = Stock(no)
-        return u'%s %s' % stock.info
+        try:
+            stock = Stock(no)
+            return u'%s %s' % stock.info
+        except URLError:
+            return u'No connection'
 
     return u'No stock'
 
