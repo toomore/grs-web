@@ -15,8 +15,14 @@ class Checking(object):
 
         return False
 
+    def ck002(self):
+        if self.data.MA(3)[0][-1] > self.data.MA(6)[0][-1] > \
+                self.data.MA(18)[0][-1] and self.data.MA(18)[1] > 0:
+            return True
+
+        return False
+
 if __name__ == "__main__":
-    checking = Checking(Stock('2618'))
-    print checking.data.MA(3)
+    checking = Checking(Stock('1215'))
     print checking.ck001()
-    print help(checking)
+    print checking.ck002()
