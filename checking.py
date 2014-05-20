@@ -1,5 +1,6 @@
 # -*- coding:utf8 -*-
 from grs import Stock
+from numpy import std
 
 class Checking(object):
 
@@ -28,7 +29,14 @@ class Checking(object):
 
         return False
 
+    def ck003(self):
+        if std(self.data.price[-45:]) < 0.25:
+            return True
+
+        return False
+
 if __name__ == "__main__":
     checking = Checking(Stock('1229'))
     print checking.ck001()
     print checking.ck002()
+    print checking.ck003()
