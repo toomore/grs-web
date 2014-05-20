@@ -18,13 +18,17 @@ class Checking(object):
         return False
 
     def ck002(self):
-        if self.data.MA(3)[0][-1] > self.data.MA(6)[0][-1] > \
-                self.data.MA(18)[0][-1] and self.data.MA(18)[1] > 0:
+        '''3日均價大於6日均價，6日均價大於18日均價。
+           （短中長線呈現多頭的態勢）'''
+        ma_18 = self.data.MA(18)
+
+        if self.data.MA(3)[0][-1] > self.data.MA(6)[0][-1] > ma_18[0][-1] and \
+                ma_18[1] > 0:
             return True
 
         return False
 
 if __name__ == "__main__":
-    checking = Checking(Stock('2618'))
+    checking = Checking(Stock('1229'))
     print checking.ck001()
     print checking.ck002()
