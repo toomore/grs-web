@@ -29,6 +29,14 @@ class Checking(object):
 
         return False
 
+    def ck003(self):
+        ''' 當日成交量，大於前三天的總成交量。（短線多空動能）'''
+        value = self.data.value
+        if value[-1] > sum(value[-4:-1]):
+            return True
+
+        return False
+
     def ck004(self):
         ''' 價走平一個半月。（箱型整理、盤整）'''
         if std(self.data.price[-45:]) < 0.25:
@@ -37,7 +45,9 @@ class Checking(object):
         return False
 
 if __name__ == "__main__":
-    checking = Checking(Stock('1229'))
+    checking = Checking(Stock('1460'))
+    print u'%s %s' % checking.data.info
     print checking.ck001()
     print checking.ck002()
+    print checking.ck003()
     print checking.ck004()
