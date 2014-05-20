@@ -19,7 +19,7 @@ class Checking(object):
         return False
 
     def ck002(self):
-        '''3日均價大於6日均價，6日均價大於18日均價。
+        ''' 3日均價大於6日均價，6日均價大於18日均價。
            （短中長線呈現多頭的態勢）'''
         ma_18 = self.data.MA(18)
 
@@ -29,7 +29,8 @@ class Checking(object):
 
         return False
 
-    def ck003(self):
+    def ck004(self):
+        ''' 價走平一個半月。（箱型整理、盤整）'''
         if std(self.data.price[-45:]) < 0.25:
             return True
 
@@ -39,4 +40,4 @@ if __name__ == "__main__":
     checking = Checking(Stock('1229'))
     print checking.ck001()
     print checking.ck002()
-    print checking.ck003()
+    print checking.ck004()
