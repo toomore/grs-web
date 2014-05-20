@@ -1,4 +1,5 @@
 # -*- coding:utf8 -*-
+from grs import BestFourPoint
 from grs import Stock
 from numpy import std
 
@@ -44,10 +45,22 @@ class Checking(object):
 
         return False
 
+    def ck005(self):
+        ''' 判斷四大買賣點 '''
+        result = BestFourPoint(self.data).best_four_point()
+        if result:
+            if result[0]:
+                return u'buy: %s' % result[1]
+            else:
+                return u'sell: %s' % result[1]
+        else:
+            return u'Do nothing.'
+
 if __name__ == "__main__":
-    checking = Checking(Stock('1460'))
+    checking = Checking(Stock('2377'))
     print u'%s %s' % checking.data.info
     print checking.ck001()
     print checking.ck002()
     print checking.ck003()
     print checking.ck004()
+    print checking.ck005()
