@@ -1,5 +1,6 @@
 # -*- coding:utf8 -*-
 from flask import Flask
+from grs import RealtimeTWSE
 from grs import Stock
 from urllib2 import URLError
 
@@ -23,6 +24,11 @@ def stock_page(no):
             return u'No connection'
 
     return u'No stock'
+
+@app.route("/rl/<no>")
+def realtime(no):
+    result = RealtimeTWSE(no)
+    return u'<pre>%s</pre>' % result.data
 
 if __name__ == '__main__':
     app.run(debug=1)
